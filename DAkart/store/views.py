@@ -15,12 +15,12 @@ def store(request,category_url=None):
     
     if category_url!= None:
         categories = get_object_or_404(Category,url = category_url)
-        products =   Product.objects.all().filter(category = categories,is_available=True)
+        products =   Product.objects.all().filter(category = categories,is_available=True).order_by('created_date')
         paginator = Paginator(products,3)
         page = request.GET.get("page")
         paged_products = paginator.get_page(page)
     else:
-        products = Product.objects.all().filter(is_available=True)
+        products = Product.objects.all().filter(is_available=True).order_by('created_date')
         paginator = Paginator(products,3)
         page = request.GET.get("page")
         paged_products = paginator.get_page(page)
@@ -34,6 +34,7 @@ def store(request,category_url=None):
      
 
 def product_detail(request,category_url,product_url):
+    context = {}
     try:
         single_product = Product.objects.get(category__url=category_url,slug=product_url)
         in_cart = CartItem.objects.filter(cart__cart_id=_cart_id(request),is_active=True,product=single_product).exists()
@@ -41,8 +42,8 @@ def product_detail(request,category_url,product_url):
         raise e
     
     context={
-        'single_product':single_product,
-        'in_cart':in_cart
+            'single_product':single_product,
+            'in_cart':in_cart
     }
 
     
