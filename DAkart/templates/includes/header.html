@@ -39,6 +39,7 @@
                 </button>
                 <div class="dropdown-menu">
                     <a class="dropdown-item" href="{% url 'store' %}">All Products  </a>
+
                     {% for category in links %}
                     <a class="dropdown-item" href="{{ category.get_url }}">{{ category.category_name}} </a>
                     {% endfor %}
@@ -64,8 +65,8 @@
                         <div class="widget-header">
                             <small class="title text-muted">Welcome guest!</small>
                             <div> 
-                                <a href="./signin.html">Sign in</a> <span class="dark-transp"> | </span>
-                                <a href="./register.html"> Register</a>
+                                <a href="{% static './signin.html' %}">Sign in</a> <span class="dark-transp"> | </span>
+                                <a href="{% static './register.html' %}"> Register</a>
                             </div>
                         </div>
                         
