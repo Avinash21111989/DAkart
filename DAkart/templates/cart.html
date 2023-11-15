@@ -43,11 +43,17 @@
                         <div class="col"> 
                             <div class="input-group input-spinner">
                                 <div class="input-group-prepend">
-                                <a href= "{% url 'decrement_cart_item' cartItem.product.id %}" class="btn btn-light" type="button" id="button-plus"> <i class="fa fa-minus"></i> </a>
+                                <a href= "{% url 'decrement_cart_item' cartItem.product.id cartItem.id %}" class="btn btn-light" type="button" id="button-plus"> <i class="fa fa-minus"></i> </a>
                                 </div>
                                 <input type="text" class="form-control"  value="{{ cartItem.quantity }}">
                                 <div class="input-group-append">
-                                <a href="{% url 'addcart' cartItem.product.id %}" class="btn btn-light" type="button" id="button-minus"> <i class="fa fa-plus"></i> </a>
+                                <form action="{% url 'addcart' cartItem.product.id %}" method="POST">
+                                    {% csrf_token %}
+                                    {% for item in cartItem.variation.all %}
+                                        <input type="hidden" name="{{ item.variation_category }}" value="{{ item_variation_value }}">
+                                    {% endfor %}
+                                        <button class="btn btn-light" type="button" id="button-minus"> <i class="fa fa-plus"></i> </button>
+                                </form>
                                 </div>
                             </div> <!-- input-group.// -->
                         </div> <!-- col.// -->
@@ -59,7 +65,7 @@
             </div> <!-- price-wrap .// -->
         </td>
         <td class="text-right"> 
-        <a href="{% url 'remove_cart_item' cartItem.product.id %}" class="btn btn-danger"> Remove</a>
+        <a href="{% url 'remove_cart_item' cartItem.product.id cartItem.id %}" class="btn btn-danger"> Remove</a>
         </td>
     </tr>
     {% endfor %}

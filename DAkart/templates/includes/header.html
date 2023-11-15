@@ -3,13 +3,13 @@
 <header class="section-header">
     <nav class="navbar p-md-0 navbar-expand-sm navbar-light border-bottom">
     <div class="container">
-      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarTop4" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-        <span class="navbar-toggler-icon"></span>
-      </button>
-      <div class="collapse navbar-collapse" id="navbarTop4">
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarTop4" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+    <div class="collapse navbar-collapse" id="navbarTop4">
         <ul class="navbar-nav mr-auto">
             <li class="nav-item dropdown">
-                 <a href="#" class="nav-link">   English </a>
+                <a href="#" class="nav-link">   English </a>
                 
             </li>
             <li class="nav-item dropdown">
@@ -20,7 +20,7 @@
             <li><a href="#" class="nav-link"> <i class="fa fa-envelope"></i> Email </a></li>
             <li><a href="#" class="nav-link"> <i class="fa fa-phone"></i> Call us </a></li>
         </ul> <!-- list-inline //  -->
-      </div> <!-- navbar-collapse .// -->
+    </div> <!-- navbar-collapse .// -->
     </div> <!-- container //  -->
     </nav>
     
@@ -52,9 +52,9 @@
                     <input type="text" required class="form-control" style="width:60%;" placeholder="Search" name="keyword">
                     
                     <div class="input-group-append">
-                      <button class="btn btn-primary" type="submit">
+                    <button class="btn btn-primary" type="submit">
                         <i class="fa fa-search"></i>
-                      </button>
+                    </button>
                     </div>
                 </div>
             </form> <!-- search-wrap .end// -->
@@ -65,7 +65,7 @@
                             <small class="title text-muted">Welcome guest!</small>
                             <div> 
                                 <a href="./signin.html">Sign in</a> <span class="dark-transp"> | </span>
-                                <a href="./register.html"> Register</a>
+                                <a href="{% url 'register' %}> Register</a>
                             </div>
                         </div>
                         
