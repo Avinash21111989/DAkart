@@ -64,7 +64,7 @@ def add_cart(request,product_id):
         cart_item = CartItem.objects.create(
         product = product,
         quantity = 1,
-        is_active =1,
+        #is_active = 1,
         cart = cart
         )
         if len(product_variation)>0:
