@@ -1,7 +1,7 @@
 import json
 from django.http import HttpResponse, JsonResponse
 from django.shortcuts import get_object_or_404, redirect, render
-from store.models import Product
+from store.models import Product, Variation
 from carts.models import Cart, CartItem
 
 # Create your views here.
@@ -15,13 +15,14 @@ def _cart_id(request):
 
 def add_cart(request,product_id):
     product = Product.objects.get(id=product_id)
+    product_variation = []
     if request.method == 'POST':
         for item in request.POST:
             key = item
             value = request.POST[key]
-
             try:
-                variation = variation.objects.get(product=product, variation_category=key, variation_value=value)
+                variation = Variation.objects.get(product=product, variation_category=key, variation_value=value)
+                product_variation.append(variation)
 
             except:
                 pass
@@ -33,18 +34,25 @@ def add_cart(request,product_id):
              cart_id = _cart_id(request)
          )
     try:
-        cart_item = CartItem.objects.get(product = product,cart = cart)
+        cart_item = CartItem.objects.create(product = product,quantity=1,cart = cart)
+        if len(product_variation)>0:
+            for item in product_variation:
+                cart_item.variation.add(item)
         cart_item.quantity +=1
         if cart_item.is_active == 0:
             cart_item.is_active = 1
-        cart_item.save()
-    except CartItem.DoesNotExist:
+            cart_item.save()
+
+    except CartItem.DoesNotExist:          
         cart_item = CartItem.objects.create(
             product = product,
             quantity = 1,
             cart = cart
         )
-        
+
+    if len(product_variation)>0:
+        for item in product_variation:
+            cart_item.variation.add(item)
 
     return redirect('cart')
 
