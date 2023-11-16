@@ -26,7 +26,7 @@ def add_cart(request,product_id):
 
             except:
                 pass
-                 
+                        
     try:
         cart = Cart.objects.get(cart_id =_cart_id(request))
     except Cart.DoesNotExist:
@@ -38,13 +38,14 @@ def add_cart(request,product_id):
         if len(product_variation)>0:
             for item in product_variation:
                 cart_item.variation.add(item)
-        cart_item.quantity +=1
+                cart_item.quantity +=1
+
         if cart_item.is_active == 0:
             cart_item.is_active = 1
             cart_item.save()
 
     except CartItem.DoesNotExist:          
-        cart_item = CartItem.objects.create(
+           cart_item = CartItem.objects.create(
             product = product,
             quantity = 1,
             cart = cart
