@@ -9,7 +9,6 @@ from carts.models import Cart, CartItem
 
 def _cart_id(request):
   cart_session_key = request.session.session_key
-
   if not cart_session_key:
     cart_session_key = request.session.create()
   return cart_session_key
@@ -27,12 +26,6 @@ def add_cart(request,product_id):
         product_variation.append(variation)
       except:
         pass
-    # color = request.POST['color']
-    # size = request.POST['size']
-  # print(color)
-  # color = request.get['color']
-  # return HttpResponse(color)
-  # exit()
   
   try:
     cart=Cart.objects.get(cart_id =_cart_id(request))
@@ -40,7 +33,6 @@ def add_cart(request,product_id):
     cart=Cart.objects.create(
       cart_id=_cart_id(request)
     )
-    # cart.save()
 
   is_cart_item_exist = CartItem.objects.filter(product=product, cart = cart).exists()  
   if is_cart_item_exist:
@@ -66,9 +58,6 @@ def add_cart(request,product_id):
       if len(product_variation)>0:
         cart_item.variation.clear()
         cart_item.variation.add(*product_variation)
-        # for item in product_variation:
-        #   cart_item.variation.add(item)
-      # cart_item.quantity+= 1
       if cart_item.is_active == 0:
         cart_item.is_active = 1
       cart_item.save()

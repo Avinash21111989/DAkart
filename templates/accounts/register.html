@@ -25,9 +25,6 @@
           <div class="form-group col-md-6">
 					  <label>Email Address</label> {{ form.email }}
           </div>
-        </div>
-
-        <div class="form-row">
           <div class="form-group col-md-6">
 					  <label>Phone Number</label> {{ form.phone_number }}
           </div> <!-- form-group end.// -->
@@ -51,7 +48,7 @@
 			</form>
 		</article><!-- card-body.// -->
     </div> <!-- card .// -->
-    <p class="text-center mt-4">Have an account? <a href="">Log In</a></p>
+    <p class="text-center mt-4">Have an account? <a href="{% url 'login' %}">Log In</a></p>
     <br><br>
 <!-- ============================ COMPONENT REGISTER  END.// ================================= -->
 
