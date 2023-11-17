@@ -2385,13 +2385,13 @@ fieldset:disabled a.btn {
 }
 
 .btn-primary {
-  color: #fff;
-  background-color: #3167eb;
+  color: #000;
+  background-color: #FFB6C1;
   border-color: #3167eb;
 }
 .btn-primary:hover {
   color: #fff;
-  background-color: #1650e0;
+  background-color: #9ACD32;
   border-color: #154cd4;
 }
 .btn-primary:focus, .btn-primary.focus {
@@ -2439,12 +2439,12 @@ fieldset:disabled a.btn {
 }
 
 .btn-success {
-  color: #fff;
-  background-color: #00b517;
-  border-color: #00b517;
+  color: #000;
+  background-color: #FFB6C1;
+  border-color: #FFB6C1;
 }
 .btn-success:hover {
-  color: #fff;
+  color: #000;
   background-color: #008f12;
   border-color: #008211;
 }
@@ -2682,12 +2682,13 @@ fieldset:disabled a.btn {
 }
 
 .btn-outline-primary {
-  color: #3167eb;
+  color: #000000;
+  background-color: #FFB6C1;
   border-color: #3167eb;
 }
 .btn-outline-primary:hover {
   color: #fff;
-  background-color: #3167eb;
+  background-color: #9ACD32;
   border-color: #3167eb;
 }
 .btn-outline-primary:focus, .btn-outline-primary.focus {

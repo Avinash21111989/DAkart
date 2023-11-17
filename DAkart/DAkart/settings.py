@@ -21,7 +21,7 @@ BASE_DIR = Path(__file__).resolve(strict=True).parent.parent
 # See https://docs.djangoproject.com/en/3.1/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'fwpwvme1l$8!e)(*872dog0@)e-&+a#(2wu$*elbbkwm^d1dgt'
+SECRET_KEY = 'o%o(3fko0ujp5-q58_w%5iw_@)wh=ie55(t^*@5^f-_az#$nxf'
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
@@ -42,8 +42,7 @@ INSTALLED_APPS = [
     'category',
     'accounts',
     'store',
-    'carts',
-    
+    'carts'
 ]
 
 MIDDLEWARE = [
@@ -57,6 +56,7 @@ MIDDLEWARE = [
 ]
 
 ROOT_URLCONF = 'DAkart.urls'
+
 AUTH_USER_MODEL = 'accounts.Account'
 
 TEMPLATES = [
@@ -72,7 +72,6 @@ TEMPLATES = [
                 'django.contrib.messages.context_processors.messages',
                 'category.context_processors.menu_links',
                 'carts.context_processors.cartCounter'
-                
             ],
         },
     },
@@ -130,6 +129,5 @@ USE_TZ = True
 
 STATIC_URL = '/static/'
 
-#media files configuration
 MEDIA_URL = '/media/'
 MEDIA_ROOT = BASE_DIR /'media'
