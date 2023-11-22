@@ -113,11 +113,41 @@
             </div> <!-- card.// -->
     
     </aside> <!-- col.// -->
-    
+
+    # Cart Pagination Logic:
+    <nav class="mt-4" aria-label="Page navigation sample">
+        {% if cartItems.has_other_pages %}
+            <ul class="pagination">
+                {% if cartItems.has_previous %}
+                <li class="page-item"><a class="page-link" href="?page={{ cartItems.previous_page_number }}">Previous</a></li>
+                {% else %}
+                <li class="page-item disabled"><a class="page-link" href="#">Previous</a></li>
+                {% endif %}
+                {% for i in cartItems.paginator.page_range %}
+                    {% if cartItems.number == i %}
+                        <li class="page-item active"><a class="page-link" href="#"> {{i}} </a></li>
+                    {% else %}
+                    <li class="page-item"><a class="page-link" href="?page={{i}}"> {{i}} </a></li>
+                    {% endif %}
+
+                {% endfor %}
+                
+                {% if cartItems.has_next %}
+                    <li class="page-item "><a class="page-link" href="?page={{cartItems.next_page_number}}">Next</a></li>
+                {% else %}
+                <li class="page-item disabled"><a class="page-link" href="#">Next</a></li>
+
+                {% endif %}
+            </ul>
+      {% endif %}
+    </nav>
     
     </div> <!-- row.// -->
+
+   
     <!-- ============================ COMPONENT 1 END .// ================================= -->
-    {% endif %}
+
+        {% endif %}
     </div> <!-- container .//  -->
     </section>
 {% endblock %}
