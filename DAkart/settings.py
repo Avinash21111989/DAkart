@@ -133,3 +133,10 @@ STATICFILES_DIRS = [os.path.join(BASE_DIR,'static'),]
 MEDIA_URL = 'media/'
 MEDIA_ROOT = BASE_DIR/'media'
 
+#mail server SMTP settings
+EMAIL_HOST = 'smtp.gmail.com'
+EMAIL_PORT = 587
+EMAIL_HOST_USER = 'kiruthiga.vinothkumar10@gmail.com'
+EMAIL_HOST_PASSWORD= 'boum tiwa fpmr zrfo'
+EMAIL_USE_TLS = True
+
