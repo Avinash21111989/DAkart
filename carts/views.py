@@ -2,6 +2,7 @@ from django.http import HttpResponse, JsonResponse
 from django.shortcuts import get_object_or_404, redirect, render
 from store.models import Product, Variation
 from carts.models import Cart, CartItem
+from django.core.paginator import EmptyPage,PageNotAnInteger, Paginator
 
 # Create your views here.
 
@@ -23,7 +24,7 @@ def add_cart(request,product_id):
             value = request.POST[key]
             try:
                 variation= Variation.objects.get(product=product,variation_category=key,variation_value=value)
-                product_variation.append(variation)                
+                product_variation.append(variation)
             except:
                 pass
     
@@ -101,20 +102,24 @@ def remove_cart_item(request, product_id,cart_item_id):
     
 def cart(request, total = 0 , cart_items=None):
     cart = Cart.objects.get(cart_id = _cart_id(request))
-    cart_items = CartItem.objects.filter(cart=cart, is_active = True)
-
+    cart_items = CartItem.objects.filter(cart=cart, is_active = True).order_by('cart_id')
+    paginator = Paginator(cart_items,4)
+    page = request.GET.get("page")
+    paged_cartitems = paginator.get_page(page)
     for cart_item in cart_items:
         total += (cart_item.product.price * cart_item.quantity )
         
     tax = (2 * total)/100
     grand_total = total + tax
     
-    context = {
-        'cartItems':cart_items,
+    context = {        
+        'cartItems':paged_cartitems,
         'total':total,
         'tax' : tax,
         'grand_total' : grand_total,
     }
     return render(request,'cart.html',context)
+
+
 
 
