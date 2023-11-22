@@ -1,7 +1,9 @@
 # Create views for store. 
+from itertools import product
 from django.db.models import Q
 from django.http import HttpResponse
 from django.shortcuts import render, get_object_or_404
+from store.models import Variation
 from category.models import Category 
 from store.models import Product
 from carts.models import CartItem
@@ -35,15 +37,18 @@ def store(request,category_url=None):
     return render(request,'store.html',context) 
 def product_detail(request,category_url,product_url): 
     try: 
-        single_product = Product.objects.get(category__url=category_url,slug=product_url) 
+        single_product = Product.objects.get(category__url=category_url,slug=product_url)        
         in_cart = CartItem.objects.filter(cart__cart_id=_cart_id(request),product = single_product,is_active = True).exists()
-        
+        variation_exist = Variation.objects.all().filter(product = single_product).exists()
         
     except Exception as e: 
         raise e  
     context={ 
         'single_product': single_product,
         'in_cart' : in_cart,
+        'variation_exist' : variation_exist,
+        
+        
     } 
     return render(request,'product-detail.html',context) 
 def search(request):
