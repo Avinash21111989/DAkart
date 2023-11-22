@@ -90,3 +90,6 @@ def activate(request,uidb64,token):
 
 def dashboard(request):
      return render(request,'accounts/dashboard.html')
+
+
+

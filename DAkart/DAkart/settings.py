@@ -133,10 +133,3 @@ STATIC_URL = '/static/'
 #media files configuration
 MEDIA_URL = '/media/'
 MEDIA_ROOT = BASE_DIR /'media'
-
-# Mail server SMTP settings
-EMAIL_HOST = 'smtp.gmail.com'
-EMAIL_PORT = 587
-EMAIL_HOST_USER = 'papitha06@gmail.com'
-EMAIL_HOST_PASSWORD = 'zlqy ddku kgzg rnpq'
-EMAIL_USE_TLS = True
