@@ -29,30 +29,40 @@
         </div> 
         
         <p>{{ single_product.description }}</p>
-        
-        
-        <hr>
+      
+          
+          
+        {% if variation_exist %}
+            <hr>        
             <div class="row">
               
                 <div class="item-option-select">
+                     
                     <h6>Choose Color</h6>
                     <select name="color" class="form-control">
                       {% for i in single_product.variation_set.colors %}
+                       
                       <option value="{{ i.variation_value }}" > {{ i.variation_value }} </option>
+
+                     
                       {% endfor %}
-                    </select> 
-                </div>
+                    </select>                 
+                </div>              
             </div> <!-- row.// -->
             <div class="row">
+              
                 <div class="item-option-select">
+                 
                     <h6>Select Size</h6>
                     <select name="size" class="form-control">
                     {% for i in single_product.variation_set.sizes %}
                       <option value="{{ i.variation_value }}" > {{ i.variation_value }} </option>
                       {% endfor %} 
-                    </select>
+                    </select>                 
                 </div>
+      
             </div> <!-- row.// -->
+        {% endif %}
             <hr>
             {% if single_product.stock == 0 %}
                 <h1 class="text-danger"> Out of stock </h1>
@@ -61,6 +71,7 @@
              
             {% endif %}
         </article>
+       
   </form> <!-- product-info-aside .// -->
             </main> <!-- col.// -->
         </div> <!-- row.// -->
