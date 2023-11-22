@@ -3,6 +3,7 @@ from django.http import HttpResponse, JsonResponse
 from django.shortcuts import get_object_or_404, redirect, render
 from store.models import Product, Variation
 from carts.models import Cart, CartItem
+from django.core.paginator import EmptyPage, PageNotAnInteger, Paginator
 
 # Create your views here.
 
@@ -103,6 +104,10 @@ def remove_cart_item(request,product_id,cart_item_id):
 def cart(request, total =0 , quantity = 1, cart_items=None):
     cart = Cart.objects.get(cart_id = _cart_id(request))
     cart_items = CartItem.objects.filter(cart=cart,is_active=True)
+    # Cart Pagination:
+    paginator = Paginator(cart_items,5)
+    page = request.GET.get("page")
+    paged_cart_items = paginator.get_page(page)
 
     for cart_item in cart_items:
         total += (cart_item.product.price * cart_item.quantity )
@@ -111,7 +116,7 @@ def cart(request, total =0 , quantity = 1, cart_items=None):
     grand_total = total + tax 
     
     context = {
-        'cartItems':cart_items,
+        'cartItems':paged_cart_items,
         'total':total,
         'tax':tax,
         'grand_total':grand_total
